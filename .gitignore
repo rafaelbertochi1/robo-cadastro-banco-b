@@ -1,0 +1,34 @@
+# sessão de login (credencial) - nunca subir
+sessao_plataforma_banco_b.json
+sessao_central_gestao.json
+
+# log local de propostas já enviadas pra Em Aberto (dedup client-side) -
+# estado de cada máquina, não faz sentido versionar
+propostas_ja_enviadas_em_aberto.txt
+
+# saídas geradas em cada execução
+data/exports/*.xlsx
+logs/*.txt
+
+# capturas do mapeador (telas internas do sistema de gestão) - nunca subir
+exploracao/
+
+# corpo bruto de respostas de erro salvo pra debug - pode conter dados
+# internos da Central de Gestão, nunca subir
+data/debug_laudos/
+
+# manter as pastas no git, mas não o conteúdo gerado
+!data/exports/.gitkeep
+!logs/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# cópias filtradas enviadas pro sistema (geradas a cada execução)
+data/envios/
+
+# trava de execução simultânea do fluxo completo
+fluxo_em_execucao.lock
