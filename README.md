@@ -1,5 +1,7 @@
 # robo-cadastro-banco-b
 
+[![Testes](https://github.com/rafaelbertochi1/robo-cadastro-banco-b/actions/workflows/testes.yml/badge.svg)](https://github.com/rafaelbertochi1/robo-cadastro-banco-b/actions/workflows/testes.yml)
+
 > **Sobre este repositório.** Versão de portfólio de um projeto real, desenvolvido em
 > ambiente corporativo em 2026. Os nomes da empresa, dos sistemas e dos bancos, as URLs
 > e os dados de exemplo foram trocados por nomes genéricos ("Central de Gestão",
@@ -1118,6 +1120,17 @@ agendada: a última linha, `[FLUXO] Resultado: ...`, e a linha
 execução" do Agendador mostra o mesmo código de saída (0 = ok; 1, 2 ou 3
 = ver a tabela em **Bug real (25/09/2026)** acima). É nele que o aviso
 de falha deve se basear.
+
+## Testes
+
+Os testes automatizados (pasta `tests/`) cobrem as decisões que o robô toma sozinho antes de mexer em qualquer tela: quais Canceladas precisam ser conferidas (lidas do Excel, não da tela), o que sai do Excel e o período pedido à Plataforma com o piso de data (Etapa 1), não reenviar proposta já cadastrada sem estragar o Excel das etapas seguintes e o aviso de abas que a tela ignora (Etapa 2), qual engenheiro vai pra cada proposta - CPF exato, nunca por nome (Etapa 3), a conversão de data e horário do Excel pros campos do modal Editar (Etapa 4), quem está completo pra finalizar e por que o resto ficou de fora (Etapa 5), e o fluxo completo: ordem das etapas, trava contra duas execuções e código de saída. Também cobrem o código do App Autenticador (vetores da RFC 6238), a nova tentativa ao abrir página, o termo seguro pra busca da tela (nº com ponto ou hífen) e a descoberta da URL de gestão pelo menu.
+
+```powershell
+pip install -r requirements.txt pytest
+pytest
+```
+
+Não precisam de navegador, internet nem acesso à Plataforma ou à Central de Gestão: as planilhas são geradas na hora com dados fictícios e as telas são trocadas por versões falsas. Rodam em cerca de um segundo. O GitHub Actions roda a mesma suíte a cada push (selo no topo deste README).
 
 ## Ferramenta de mapeamento (`mapear_central_gestao.py`)
 
